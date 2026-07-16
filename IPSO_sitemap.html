@@ -288,6 +288,17 @@ body{background:var(--bg);color:var(--text);font-family:"Helvetica Neue",Helveti
 .note-src-link:hover{text-decoration:underline;}
 .cta-note{font-size:10.5px;color:var(--brand-mid);padding:4px 14px 4px 22px;font-style:italic;}
 .cta-note::before{content:'↳ ';}
+.ptgroup-label{font-size:9px;text-transform:uppercase;letter-spacing:.12em;font-weight:600;color:var(--faint);padding:8px 14px 3px;margin-top:2px;}
+.ptgroup-label:first-child{padding-top:4px;}
+.ptgroup-empty{font-size:10.5px;color:var(--faint);font-style:italic;padding:2px 14px 4px 22px;}
+/* ── Card connections ── */
+.card-conn{border-top:1px solid var(--border-light);padding:7px 14px;display:flex;align-items:flex-start;gap:7px;flex-wrap:wrap;background:color-mix(in srgb,var(--sc,var(--brand)) 4%,var(--surface));}
+.card-conn-label{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);font-weight:600;white-space:nowrap;padding-top:2px;}
+.conn-chip{font-size:10px;padding:1px 7px;border-radius:2px;border:1px solid var(--border);background:var(--surface);color:var(--muted);white-space:nowrap;}
+.conn-chip.ext{border-color:var(--c-ext);color:var(--c-ext);background:color-mix(in srgb,var(--c-ext) 6%,transparent);}
+.conn-chip.auth{border-color:var(--c-auth);color:var(--c-auth);background:color-mix(in srgb,var(--c-auth) 6%,transparent);}
+.conn-chip.cta{border-color:var(--brand-mid);color:var(--brand-mid);background:color-mix(in srgb,var(--brand-mid) 6%,transparent);font-weight:600;}
+.sec-card.collapsed .card-conn{display:none;}
 
 /* ── Mobile ── */
 @media(max-width:680px){
@@ -372,6 +383,12 @@ body{background:var(--bg);color:var(--text);font-family:"Helvetica Neue",Helveti
         <div class="pitem"><span class="pname">Organizzazione</span><span class="pbadge pb-sez">sezione</span></div>
         <div class="pitem"><span class="pname">Certificazioni e riconoscimenti</span><span class="pbadge pb-sez">sezione</span></div>
       </div>
+      <div class="card-conn">
+        <span class="card-conn-label">Collega a</span>
+        <span class="conn-chip cta">Contatti</span>
+        <span class="conn-chip">Formazione</span>
+        <span class="conn-chip">Rete professionale</span>
+      </div>
     </div>
 
     <!-- Formazione -->
@@ -384,14 +401,11 @@ body{background:var(--bg);color:var(--text);font-family:"Helvetica Neue",Helveti
         <span class="sec-chevron">▼</span>
       </div>
       <div class="page-tree">
+        <div class="ptgroup-label">Corsi</div>
         <div class="pitem"><span class="pname">Counseling Somatorelazionale</span><span class="purl">/formazione/counseling-somatorelazionale/</span></div>
-        <div class="cta-note">CTA iscrizione / info → Contatti</div>
+        <div class="cta-note">CTA iscrizione / info → Contatti · link correlati → Articoli, Media</div>
         <div class="pitem"><span class="pname">Pratica Bioenergetica</span><span class="purl">/formazione/pratica-bioenergetica/</span></div>
-        <div class="cta-note">CTA iscrizione / info → Contatti</div>
-        <div class="pitem"><span class="pname">IPSO Smart</span><span class="purl">/formazione/ipso-smart/</span></div>
-        <div class="cta-note">CTA iscrizione / info → Contatti</div>
-        <div class="pitem"><span class="pname">Seminari Introduttivi</span><span class="purl">/formazione/seminari-introduttivi/</span></div>
-        <div class="cta-note">CTA iscrizione / info → Contatti</div>
+        <div class="cta-note">CTA iscrizione / info → Contatti · link correlati → Articoli, Media</div>
         <div class="tp-block">
           <div class="tp-head">
             <span class="tp-title">Teoria Polivagale</span>
@@ -409,7 +423,23 @@ body{background:var(--bg);color:var(--text);font-family:"Helvetica Neue",Helveti
             <div class="tp-page ext">→ Area corsisti TP</div>
           </div>
         </div>
-        <div class="pitem dynamic" style="margin-top:4px;"><span class="pname">[slug-corso] — altri percorsi futuri</span><span class="pbadge pb-dyn">dinamica</span></div>
+        <div class="ptgroup-label">Master</div>
+        <div class="ptgroup-empty">Da definire</div>
+        <div class="ptgroup-label">Seminari</div>
+        <div class="ptgroup-empty">Da definire</div>
+        <div class="ptgroup-label">Altro</div>
+        <div class="pitem"><span class="pname">Tirocinio</span><span class="purl">/formazione/tirocinio/</span></div>
+        <div class="cta-note">CTA info → Contatti</div>
+        <div class="pitem"><span class="pname">Borsa di studio</span><span class="purl">/formazione/borsa-di-studio/</span></div>
+        <div class="cta-note">CTA candidatura → Contatti</div>
+        <div class="pitem dynamic" style="margin-top:4px;"><span class="pname">[slug-corso] — percorsi futuri</span><span class="pbadge pb-dyn">dinamica</span></div>
+      </div>
+      <div class="card-conn">
+        <span class="card-conn-label">Collega a</span>
+        <span class="conn-chip cta">Contatti</span>
+        <span class="conn-chip">Archivio — Articoli</span>
+        <span class="conn-chip">Archivio — Media</span>
+        <span class="conn-chip auth">Area corsisti</span>
       </div>
     </div>
 
@@ -431,6 +461,11 @@ body{background:var(--bg);color:var(--text);font-family:"Helvetica Neue",Helveti
         <div class="pitem dynamic"><span class="pname">[slug-evento] — scheda evento</span><span class="pbadge pb-dyn">pagina dinamica</span></div>
         <div class="cta-note">CTA "Iscriviti" su ogni scheda evento → Contatti</div>
       </div>
+      <div class="card-conn">
+        <span class="card-conn-label">Collega a</span>
+        <span class="conn-chip cta">Contatti</span>
+        <span class="conn-chip">Formazione — corso correlato</span>
+      </div>
     </div>
 
     <!-- Archivio -->
@@ -445,11 +480,19 @@ body{background:var(--bg);color:var(--text);font-family:"Helvetica Neue",Helveti
       <div class="page-tree">
         <div class="pitem"><span class="pname">Pubblicazioni</span><span class="purl">/archivio/pubblicazioni/</span></div>
         <div class="pitem"><span class="pname">Articoli</span><span class="purl">/archivio/articoli/</span></div>
-        <div class="pitem"><span class="pname">Libri</span><span class="purl">/archivio/libri/</span></div>
-        <div class="pitem"><span class="pname">Riviste</span><span class="purl">/archivio/riviste/</span></div>
-        <div class="pitem"><span class="pname">Video e audio</span><span class="purl">/archivio/video-e-audio/</span></div>
+        <div class="pitem"><span class="pname">News</span><span class="purl">/archivio/news/</span></div>
+        <div class="pitem"><span class="pname">Libri e riviste</span><span class="purl">/archivio/libri-e-riviste/</span></div>
+        <div class="pitem"><span class="pname">Media</span><span class="purl">/archivio/media/</span></div>
+        <div class="pitem sub"><span class="pname">Video</span><span class="purl">/archivio/media/video/</span></div>
+        <div class="pitem sub"><span class="pname">Audio</span><span class="purl">/archivio/media/audio/</span></div>
+        <div class="pitem sub"><span class="pname">Testi</span><span class="purl">/archivio/media/testi/</span></div>
         <div class="pitem"><span class="pname">Centro Documentazione Wilhelm Reich</span><span class="purl">/archivio/centro-documentazione-wilhelm-reich/</span></div>
         <div class="pitem dynamic"><span class="pname">[tipologia] / [slug-contenuto]</span><span class="pbadge pb-dyn">dinamica</span></div>
+      </div>
+      <div class="card-conn">
+        <span class="card-conn-label">Collega a</span>
+        <span class="conn-chip">Formazione — contenuti correlati</span>
+        <span class="conn-chip">Chi siamo</span>
       </div>
     </div>
 
@@ -466,6 +509,10 @@ body{background:var(--bg);color:var(--text);font-family:"Helvetica Neue",Helveti
         <div class="pitem"><span class="pname">Form di contatto</span></div>
         <div class="pitem"><span class="pname">Prenota un colloquio orientativo</span><span class="pbadge pb-cta">tramite form</span></div>
         <div class="pitem"><span class="pname">Recapiti e sede</span><span class="purl">/contatti/</span></div>
+      </div>
+      <div class="card-conn">
+        <span class="card-conn-label">Collega a</span>
+        <span class="conn-chip ext">↗ Sistema prenotazione esterno</span>
       </div>
     </div>
 
@@ -498,95 +545,8 @@ body{background:var(--bg);color:var(--text);font-family:"Helvetica Neue",Helveti
   <!-- Cerca: feature di header -->
   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;">
     <div class="feat-chip"><strong>Cerca</strong><span class="feat-where">feature nell'header</span> — non una pagina separata. I risultati vivono su un URL tipo <code style="font-size:10px;">/cerca/?q=…</code> ma non sono indicizzati.</div>
-    <div class="feat-chip"><strong>Newsletter</strong><span class="feat-where">sezione in Eventi / Approfondimenti</span> — l'iscrizione è nella pagina eventi/approfondimenti. Nessuna pagina dedicata.</div>
+    <div class="feat-chip"><strong>Newsletter</strong><span class="feat-where">sezione in Eventi</span> — l'iscrizione è nella pagina eventi. Nessuna pagina dedicata.</div>
   </div>
-
-  <!-- Flussi strategici -->
-  <div class="divider">Flussi strategici — come le pagine si collegano</div>
-  <div class="flows-section">
-
-    <div class="flow-item">
-      <div class="flow-head">
-        <span class="flow-obj">Scoperta organica → iscrizione a un corso</span>
-        <span class="flow-who">Prospect</span>
-      </div>
-      <div class="flow-body">
-        <div class="flow-node"><div class="fn-page">Archivio<small>articolo o video</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page">Chi siamo<small>Biosofia</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page">Formazione<small>pagina corso</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page">Contatti<small>colloquio orientativo</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page ext">Sistema prenotazione<small>esterno</small></div></div>
-      </div>
-    </div>
-
-    <div class="flow-item">
-      <div class="flow-head">
-        <span class="flow-obj">Ricerca diretta corso → iscrizione</span>
-        <span class="flow-who">Prospect con intenzione</span>
-      </div>
-      <div class="flow-body">
-        <div class="flow-node"><div class="fn-page">Home<small>corsi in evidenza</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page">Formazione / [corso]<small>landing corso</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page">Contatti<small>colloquio / info</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page ext">Sistema prenotazione<small>esterno</small></div></div>
-      </div>
-    </div>
-
-    <div class="flow-item">
-      <div class="flow-head">
-        <span class="flow-obj">Evento → approfondimento → corso</span>
-        <span class="flow-who">Prospect da evento</span>
-      </div>
-      <div class="flow-body">
-        <div class="flow-node"><div class="fn-page">Home / Social<small>promozione evento</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page">Eventi / [evento]<small>scheda evento</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page">Formazione<small>corso correlato</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page">Contatti<small>colloquio</small></div></div>
-      </div>
-    </div>
-
-    <div class="flow-item">
-      <div class="flow-head">
-        <span class="flow-obj">Corsista → lezione → test ECM</span>
-        <span class="flow-who">Corsista attivo</span>
-      </div>
-      <div class="flow-body">
-        <div class="flow-node"><div class="fn-page auth">Login<small>area corsisti</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page auth">Dashboard<small>riprendi da qui</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page auth">Lezione<small>video Vimeo embed</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page auth">Test ECM<small>handoff screen</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page ext">Promate / Spazio Iris<small>⚠ esterno</small></div></div>
-      </div>
-      <div class="flow-note">Il passaggio a Promate è l'unico punto non ancora integrabile con certezza. Vedi tab Note tecniche.</div>
-    </div>
-
-    <div class="flow-item">
-      <div class="flow-head">
-        <span class="flow-obj">Alumni / sostenitore → community → formazione continua</span>
-        <span class="flow-who">Ex corsista</span>
-      </div>
-      <div class="flow-body">
-        <div class="flow-node"><div class="fn-page auth">Login<small>area corsisti</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page auth">Community<small>post-training</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page">Formazione<small>nuovo corso</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page">Contatti<small>iscrizione</small></div></div>
-      </div>
-    </div>
-
-    <div class="flow-item">
-      <div class="flow-head">
-        <span class="flow-obj">Trovare un professionista</span>
-        <span class="flow-who">Utente generico</span>
-      </div>
-      <div class="flow-body">
-        <div class="flow-node"><div class="fn-page">Footer / Chi siamo<small>link contestuale</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page">Rete professionale<small>directory filtrata</small></div><span class="fn-arrow">→</span></div>
-        <div class="flow-node"><div class="fn-page ext">Contatto diretto<small>email / sito professionista</small></div></div>
-      </div>
-      <div class="flow-note">IPSO non gestisce il contatto: il link porta direttamente al professionista o al suo sito esterno.</div>
-    </div>
-
-  </div><!-- /flows-section -->
 
   <!-- Area corsisti -->
   <div class="divider">Area autenticata — noindex</div>
