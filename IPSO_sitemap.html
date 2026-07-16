@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IPSO — Sitemap UX</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#EAEAE4; --surface:#F4F4F0; --surface-2:#E8E6E0;
+  --border:#D2CEC6; --border-light:#E0DDD6;
+  --text:#1A1C18; --muted:#706E66; --faint:#A8A6A0;
+  --brand:#1D4035; --brand-mid:#2A5C4E;
+  --c-chi:#2B5878; --c-form:#4B481E; --c-eventi:#6B3A22;
+  --c-archivio:#3A3A58; --c-rete:#1E5444; --c-auth:#704E14;
+  --c-legali:#5A5A58; --c-ext:#8B3A3A;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#181C1A; --surface:#202420; --surface-2:#252A26;
+  --border:#2E3430; --border-light:#263028;
+  --text:#E4E8E2; --muted:#8A8E88; --faint:#484E48;
+  --brand:#3A8068; --brand-mid:#4A9878;
+  --c-chi:#5A8AB4; --c-form:#8A8850; --c-eventi:#A0644A;
+  --c-archivio:#7070A0; --c-rete:#4A9478; --c-auth:#C09040;
+  --c-legali:#7A7A78; --c-ext:#C06060;
+}}
+:root[data-theme="dark"]{
+  --bg:#181C1A; --surface:#202420; --surface-2:#252A26;
+  --border:#2E3430; --border-light:#263028;
+  --text:#E4E8E2; --muted:#8A8E88; --faint:#484E48;
+  --brand:#3A8068; --brand-mid:#4A9878;
+  --c-chi:#5A8AB4; --c-form:#8A8850; --c-eventi:#A0644A;
+  --c-archivio:#7070A0; --c-rete:#4A9478; --c-auth:#C09040;
+  --c-legali:#7A7A78; --c-ext:#C06060;
+}
+:root[data-theme="light"]{
+  --bg:#EAEAE4; --surface:#F4F4F0; --surface-2:#E8E6E0;
+  --border:#D2CEC6; --border-light:#E0DDD6;
+  --text:#1A1C18; --muted:#706E66; --faint:#A8A6A0;
+  --brand:#1D4035; --brand-mid:#2A5C4E;
+  --c-chi:#2B5878; --c-form:#4B481E; --c-eventi:#6B3A22;
+  --c-archivio:#3A3A58; --c-rete:#1E5444; --c-auth:#704E14;
+  --c-legali:#5A5A58; --c-ext:#8B3A3A;
+}
+
+body{background:var(--bg);color:var(--text);font-family:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;font-size:13px;line-height:1.5;}
+
+/* ── Header ── */
+.hdr{background:var(--brand);color:#fff;padding:24px 40px 20px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.hdr-logo{font-family:Georgia,serif;font-size:28px;font-weight:normal;letter-spacing:.1em;}
+.hdr-sub{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:4px;}
+.hdr-right{display:flex;align-items:flex-start;gap:12px;}
+.hdr-meta{font-size:10px;color:rgba(255,255,255,.38);text-align:right;line-height:1.9;font-family:Georgia,serif;font-style:italic;}
+.theme-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:3px;padding:5px 12px;font-size:11px;cursor:pointer;white-space:nowrap;}
+.theme-btn:hover{background:rgba(255,255,255,.25);}
+
+/* ── Domain bar ── */
+.domain-bar{background:color-mix(in srgb,var(--brand) 10%,var(--surface));border-bottom:1px solid var(--border);padding:7px 40px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.domain-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);font-weight:600;}
+.domain-chip{display:inline-flex;align-items:center;gap:5px;background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:2px 10px;font-family:"Courier New",monospace;font-size:11px;color:var(--brand);font-weight:600;}
+.domain-note{font-size:11px;color:var(--muted);}
+
+/* ── Tabs ── */
+.tab-nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 40px;display:flex;gap:0;}
+.tab-btn{background:none;border:none;border-bottom:2px solid transparent;padding:11px 20px 9px;font-size:12px;font-family:inherit;cursor:pointer;color:var(--muted);letter-spacing:.03em;transition:color .15s,border-color .15s;}
+.tab-btn:hover{color:var(--text);}
+.tab-btn.active{color:var(--brand);border-bottom-color:var(--brand);font-weight:600;}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+/* ── Main ── */
+.main{padding:28px 40px 52px;}
+
+/* ── Legend ── */
+.legend{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:20px;padding:10px 16px;background:var(--surface);border:1px solid var(--border);border-radius:3px;}
+.legend-ttl{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);font-weight:600;}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);}
+.ldot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.lswatch{width:10px;height:3px;border-radius:1px;flex-shrink:0;}
+.lkey{display:inline-block;padding:1px 5px;border-radius:2px;font-size:10px;border:1px solid currentColor;font-family:monospace;}
+.lext{width:10px;height:10px;border-radius:2px;background:var(--c-ext);opacity:.7;flex-shrink:0;}
+
+/* ── Home ── */
+.home-bar{background:var(--brand);border-radius:3px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;}
+.home-left{display:flex;align-items:center;gap:12px;}
+.home-icon{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.home-name{font-family:Georgia,serif;font-size:16px;font-weight:normal;color:#fff;letter-spacing:.04em;}
+.home-url{font-family:"Courier New",monospace;font-size:10px;color:rgba(255,255,255,.5);}
+.home-desc{font-size:11px;color:rgba(255,255,255,.55);text-align:right;max-width:320px;line-height:1.5;}
+
+/* ── Divider ── */
+.divider{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:600;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border-light);}
+.divider::before{flex:.04 1 0;}
+
+/* ── Section grid ── */
+.sec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;margin-bottom:20px;}
+
+/* ── Section card ── */
+.sec-card{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--sc);border-radius:3px;overflow:hidden;}
+.sec-head{padding:10px 14px 9px;border-bottom:1px solid var(--border-light);display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;user-select:none;gap:8px;}
+.sec-head:hover{background:var(--surface-2);}
+.sec-head-left{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0;}
+.sec-name{font-family:Georgia,serif;font-size:13.5px;font-weight:normal;color:var(--sc);}
+.sec-url{font-family:"Courier New",monospace;font-size:10px;color:var(--muted);word-break:break-all;}
+.sec-chevron{font-size:9px;color:var(--faint);transition:transform .18s;flex-shrink:0;margin-top:3px;}
+.sec-card.collapsed .sec-chevron{transform:rotate(-90deg);}
+
+/* ── Page tree ── */
+.page-tree{padding:6px 0 8px;}
+.sec-card.collapsed .page-tree{display:none;}
+
+.pitem{position:relative;display:flex;align-items:flex-start;gap:6px;padding:4px 14px 4px 22px;}
+.pitem::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:1px;background:var(--border-light);}
+.pitem:last-child::before{height:60%;}
+.pitem::after{content:'';position:absolute;left:14px;top:12px;width:7px;height:1px;background:var(--border);}
+.pitem.sub{padding-left:38px;}
+.pitem.sub::before{left:30px;}
+.pitem.sub::after{left:30px;}
+
+.pname{font-size:12px;color:var(--text);flex:1;min-width:0;white-space:normal;line-height:1.4;}
+.purl{font-family:"Courier New",monospace;font-size:9.5px;color:var(--faint);word-break:break-all;flex-shrink:0;max-width:48%;text-align:right;line-height:1.4;}
+.pitem.dynamic .pname{color:var(--muted);font-style:italic;}
+.pbadge{font-size:9px;padding:1px 5px;border-radius:2px;white-space:nowrap;flex-shrink:0;border:1px solid transparent;line-height:1.4;margin-top:1px;}
+.pb-dyn{border-color:var(--faint);color:var(--faint);}
+.pb-hub{border-color:var(--sc,var(--brand));color:var(--sc,var(--brand));}
+.pb-ext{background:color-mix(in srgb,var(--c-ext) 10%,transparent);border-color:var(--c-ext);color:var(--c-ext);}
+.pb-sez{border-color:var(--faint);color:var(--faint);font-style:italic;}
+.pb-cta{background:color-mix(in srgb,var(--brand-mid) 8%,transparent);border-color:var(--brand-mid);color:var(--brand-mid);}
+.pb-pag-q{border-color:var(--c-eventi);color:var(--c-eventi);}
+
+/* ── TP block ── */
+.tp-block{margin:6px 14px 4px;padding:10px 12px 8px;background:var(--surface-2);border:1px solid var(--border);border-left:2px solid var(--c-form);border-radius:2px;}
+.tp-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:4px;flex-wrap:wrap;}
+.tp-title{font-size:12.5px;font-weight:600;color:var(--c-form);}
+.tp-url{font-family:monospace;font-size:9.5px;color:var(--faint);}
+.tp-note{font-size:10.5px;color:var(--muted);line-height:1.5;margin-bottom:8px;}
+.tp-pages{display:grid;grid-template-columns:1fr 1fr;gap:2px 8px;}
+.tp-page{font-size:11px;color:var(--muted);padding:2px 0;}
+.tp-page.ext{color:var(--c-auth);}
+
+/* ── Rete professionale nota ── */
+.rete-nota{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--c-rete);border-radius:3px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;}
+.rete-nota-main{flex:1;min-width:200px;}
+.rete-nota-title{font-family:Georgia,serif;font-size:13px;color:var(--c-rete);margin-bottom:2px;}
+.rete-nota-url{font-family:monospace;font-size:10px;color:var(--muted);margin-bottom:6px;}
+.rete-nota-desc{font-size:11.5px;color:var(--muted);line-height:1.5;}
+.rete-access-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.rete-chip{font-size:10px;padding:2px 8px;border-radius:2px;background:var(--surface-2);border:1px solid var(--border);color:var(--muted);}
+.rete-nota-pages{flex-shrink:0;}
+.rete-mini-tree{display:flex;flex-direction:column;gap:3px;}
+.rete-mini-item{font-size:11px;color:var(--muted);display:flex;align-items:baseline;gap:6px;}
+.rete-mini-item span:first-child::before{content:'· ';}
+
+/* ── Contatti card ── */
+.contatti-card{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--brand-mid);border-radius:3px;margin-bottom:20px;overflow:hidden;}
+.contatti-head{padding:10px 16px 9px;border-bottom:1px solid var(--border-light);display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;user-select:none;}
+.contatti-head:hover{background:var(--surface-2);}
+.contatti-name{font-family:Georgia,serif;font-size:14px;color:var(--brand-mid);}
+.contatti-url{font-family:monospace;font-size:10px;color:var(--muted);}
+.contatti-badge{font-size:9.5px;padding:2px 8px;background:color-mix(in srgb,var(--brand-mid) 10%,transparent);border:1px solid var(--brand-mid);color:var(--brand-mid);border-radius:2px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+.contatti-body{padding:14px 16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;}
+.sec-card.collapsed .contatti-body,.contatti-card.collapsed .contatti-body{display:none;}
+.contatti-chevron{font-size:9px;color:var(--faint);transition:transform .18s;flex-shrink:0;margin-top:3px;}
+.contatti-card.collapsed .contatti-chevron{transform:rotate(-90deg);}
+.contatti-section{background:var(--bg);border:1px solid var(--border-light);border-radius:2px;padding:10px 12px;}
+.cs-title{font-size:11.5px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.cs-desc{font-size:11px;color:var(--muted);line-height:1.5;}
+.cs-ext{margin-top:6px;font-size:10.5px;color:var(--c-ext);display:flex;align-items:center;gap:4px;}
+
+/* Features header/footer */
+.features-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.feat-chip{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:7px 12px;font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:6px;}
+.feat-chip strong{color:var(--text);font-size:12px;}
+.feat-where{font-size:10px;padding:1px 6px;border-radius:2px;background:var(--surface-2);border:1px solid var(--border);color:var(--faint);}
+
+/* ── Flussi strategici ── */
+.flows-section{margin-bottom:24px;}
+.flow-item{background:var(--surface);border:1px solid var(--border);border-radius:3px;margin-bottom:8px;overflow:hidden;}
+.flow-head{display:flex;align-items:flex-start;gap:10px;padding:10px 16px;border-bottom:1px solid var(--border-light);}
+.flow-obj{font-size:11px;font-weight:600;color:var(--text);flex:1;}
+.flow-who{font-size:10px;padding:1px 8px;border-radius:2px;background:var(--surface-2);border:1px solid var(--border);color:var(--muted);white-space:nowrap;flex-shrink:0;}
+.flow-body{padding:10px 16px;display:flex;align-items:center;flex-wrap:wrap;gap:0;}
+.flow-node{display:flex;align-items:center;gap:0;}
+.fn-page{font-size:11.5px;padding:4px 10px;border-radius:3px;background:var(--surface-2);border:1px solid var(--border);color:var(--text);white-space:nowrap;line-height:1.3;}
+.fn-page small{display:block;font-size:9.5px;color:var(--muted);margin-top:1px;}
+.fn-page.ext{background:color-mix(in srgb,var(--c-ext) 8%,var(--surface-2));border-color:color-mix(in srgb,var(--c-ext) 40%,var(--border));color:var(--c-ext);}
+.fn-page.auth{background:color-mix(in srgb,var(--c-auth) 8%,var(--surface-2));border-color:color-mix(in srgb,var(--c-auth) 40%,var(--border));color:var(--c-auth);}
+.fn-arrow{font-size:14px;color:var(--faint);padding:0 6px;flex-shrink:0;}
+.flow-note{padding:0 16px 10px;font-size:10.5px;color:var(--muted);font-style:italic;}
+
+/* ── Auth section ── */
+.auth-wrap{border:1px solid var(--c-auth);border-radius:4px;overflow:hidden;margin-bottom:20px;}
+.auth-hdr{background:var(--c-auth);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;gap:12px;}
+.auth-title-group{display:flex;align-items:center;gap:12px;}
+.auth-lock{width:26px;height:26px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;}
+.auth-name{font-family:Georgia,serif;font-size:15px;font-weight:normal;color:#fff;}
+.auth-url-sub{font-size:10px;color:rgba(255,255,255,.5);font-family:monospace;margin-top:1px;}
+.auth-tag{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.3);padding:2px 8px;border-radius:2px;}
+.auth-chevron{font-size:9px;color:rgba(255,255,255,.5);transition:transform .18s;}
+.auth-wrap.collapsed .auth-chevron{transform:rotate(-90deg);}
+.auth-body{background:var(--surface);padding:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.auth-wrap.collapsed .auth-body{display:none;}
+.auth-card{background:var(--bg);border:1px solid var(--border);border-top:2px solid var(--c-auth);border-radius:3px;overflow:hidden;}
+.auth-card-head{padding:8px 12px 7px;border-bottom:1px solid var(--border-light);display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;user-select:none;gap:6px;}
+.auth-card-head:hover{background:var(--surface);}
+.auth-card-name{font-family:Georgia,serif;font-size:12.5px;font-weight:normal;color:var(--c-auth);}
+.auth-card-url{font-family:monospace;font-size:10px;color:var(--muted);word-break:break-all;}
+.auth-card-chevron{font-size:8px;color:var(--faint);transition:transform .18s;flex-shrink:0;margin-top:3px;}
+.auth-card.collapsed .auth-card-chevron{transform:rotate(-90deg);}
+.auth-card .page-tree{padding:4px 0 6px;}
+.auth-card.collapsed .page-tree{display:none;}
+.auth-card .pitem{padding-left:20px;}
+.auth-card .pitem::before{left:12px;}
+.auth-card .pitem::after{left:12px;top:12px;}
+.auth-card .pitem.sub{padding-left:34px;}
+.auth-card .pitem.sub::before{left:26px;}
+.auth-card .pitem.sub::after{left:26px;}
+.auth-meta{border-top:1px solid var(--border-light);padding:8px 16px;background:var(--surface);display:flex;gap:14px;flex-wrap:wrap;font-size:10.5px;color:var(--muted);}
+.auth-meta-item{display:flex;align-items:center;gap:5px;}
+.auth-meta-dot{width:5px;height:5px;border-radius:50%;background:var(--c-auth);opacity:.7;}
+
+/* ── Legal ── */
+.legal-strip{display:flex;align-items:stretch;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--c-legali);border-radius:3px;overflow:hidden;margin-bottom:20px;}
+.legal-label{background:var(--c-legali);color:#fff;writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:12px 6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.legal-items{display:flex;flex-wrap:wrap;flex:1;}
+.legal-item{padding:10px 14px;border-right:1px solid var(--border-light);display:flex;flex-direction:column;gap:2px;min-width:150px;}
+.legal-item:last-child{border-right:none;}
+.legal-name{font-size:12px;color:var(--text);}
+.legal-url{font-family:monospace;font-size:10px;color:var(--muted);}
+
+/* ── Redirect ── */
+.redirect-box{padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--faint);border-radius:3px;}
+.redirect-title{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin-bottom:10px;font-weight:600;}
+.redirect-item{display:flex;align-items:baseline;gap:8px;padding:4px 0;border-bottom:1px solid var(--border-light);flex-wrap:wrap;}
+.redirect-item:last-child{border-bottom:none;}
+.rf{font-family:monospace;font-size:11px;color:var(--muted);}
+.ra{font-size:10px;color:var(--faint);}
+.rt{font-family:monospace;font-size:11px;color:var(--brand);}
+.rn{font-size:10px;color:var(--faint);font-style:italic;}
+
+/* ── NOTE TAB ── */
+.note-main{padding:28px 40px 52px;}
+.note-section{background:var(--surface);border:1px solid var(--border);border-radius:3px;margin-bottom:16px;overflow:hidden;}
+.note-section-head{padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;}
+.note-section-head:hover{background:var(--surface-2);}
+.note-num{width:22px;height:22px;border-radius:50%;background:var(--brand);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:600;}
+.note-num.ok{background:var(--c-rete);}
+.note-num.warn{background:var(--c-auth);}
+.note-num.info{background:var(--c-archivio);}
+.note-title{font-family:Georgia,serif;font-size:14px;font-weight:normal;color:var(--text);flex:1;}
+.note-status{font-size:10px;padding:2px 8px;border-radius:2px;font-weight:600;letter-spacing:.04em;white-space:nowrap;}
+.ns-ok{background:color-mix(in srgb,var(--c-rete) 12%,transparent);color:var(--c-rete);border:1px solid var(--c-rete);}
+.ns-warn{background:color-mix(in srgb,var(--c-auth) 12%,transparent);color:var(--c-auth);border:1px solid var(--c-auth);}
+.ns-info{background:color-mix(in srgb,var(--c-archivio) 12%,transparent);color:var(--c-archivio);border:1px solid var(--c-archivio);}
+.note-chevron{font-size:9px;color:var(--faint);transition:transform .18s;}
+.note-section.collapsed .note-chevron{transform:rotate(-90deg);}
+.note-body{padding:16px 18px;}
+.note-section.collapsed .note-body{display:none;}
+.note-p{font-size:12.5px;color:var(--text);line-height:1.7;margin-bottom:10px;}
+.note-p:last-child{margin-bottom:0;}
+.note-ul{padding-left:18px;margin-bottom:10px;}
+.note-ul li{font-size:12.5px;color:var(--text);line-height:1.7;margin-bottom:3px;}
+.note-ul li:last-child{margin-bottom:0;}
+.note-box{background:var(--surface-2);border:1px solid var(--border);border-radius:3px;padding:12px 14px;margin:10px 0;}
+.note-box-title{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);font-weight:600;margin-bottom:8px;}
+.note-q{padding:8px 0;border-bottom:1px solid var(--border-light);display:flex;align-items:flex-start;gap:10px;}
+.note-q:last-child{border-bottom:none;padding-bottom:0;}
+.note-q-num{font-size:11px;font-weight:600;color:var(--brand);flex-shrink:0;min-width:16px;}
+.note-q-text{font-size:12px;color:var(--text);line-height:1.5;}
+.note-q-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+.handoff-mock{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:20px;margin:12px 0;text-align:center;}
+.handoff-title{font-family:Georgia,serif;font-size:15px;font-weight:normal;color:var(--text);margin-bottom:6px;}
+.handoff-sub{font-size:11.5px;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.handoff-creds{font-size:11px;color:var(--faint);background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:8px 12px;margin-bottom:14px;text-align:left;}
+.handoff-btn{display:inline-block;background:var(--brand);color:#fff;padding:8px 20px;border-radius:3px;font-size:12px;letter-spacing:.04em;}
+.note-stack{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin:10px 0;}
+.stack-card{background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:12px 14px;}
+.stack-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;}
+.stack-type{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;}
+.stack-desc{font-size:11.5px;color:var(--muted);line-height:1.5;}
+.stack-tag{display:inline-block;margin-top:6px;font-size:10px;padding:1px 7px;border-radius:2px;background:color-mix(in srgb,var(--c-rete) 10%,transparent);color:var(--c-rete);border:1px solid var(--c-rete);}
+.stack-tag.warn{background:color-mix(in srgb,var(--c-auth) 10%,transparent);color:var(--c-auth);border-color:var(--c-auth);}
+.note-sources{margin-top:12px;padding-top:10px;border-top:1px solid var(--border-light);}
+.note-src-title{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);font-weight:600;margin-bottom:5px;}
+.note-src-link{display:block;font-size:10.5px;color:var(--brand);word-break:break-all;margin-bottom:3px;line-height:1.4;}
+.note-src-link:hover{text-decoration:underline;}
+.cta-note{font-size:10.5px;color:var(--brand-mid);padding:4px 14px 4px 22px;font-style:italic;}
+.cta-note::before{content:'↳ ';}
+
+/* ── Mobile ── */
+@media(max-width:680px){
+  .hdr,.main,.note-main,.domain-bar,.tab-nav{padding-left:18px;padding-right:18px;}
+  .sec-grid{grid-template-columns:1fr;}
+  .auth-body{grid-template-columns:1fr;}
+  .hdr-meta,.auth-tag,.home-desc{display:none;}
+  .flow-body{gap:4px;}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none !important;}}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div>
+    <div class="hdr-logo">IPSO</div>
+    <div class="hdr-sub">Sitemap · Architettura UX · Note tecniche</div>
+  </div>
+  <div class="hdr-right">
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">☾ Dark</button>
+    <div class="hdr-meta">Documento operativo<br>Rev. 2 — luglio 2025<br>Dominio: istitutoipso.it</div>
+  </div>
+</header>
+
+<div class="domain-bar">
+  <span class="domain-label">Dominio principale</span>
+  <span class="domain-chip">🌐 istitutoipso.it</span>
+  <span class="domain-note">Area corsisti: <code style="font-size:10px;">istitutoipso.it/area-corsisti/</code> oppure <code style="font-size:10px;">app.istitutoipso.it/</code> — da decidere</span>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('sitemap',this)">Sitemap</button>
+  <button class="tab-btn" onclick="showTab('note',this)">Note tecniche</button>
+</div>
+
+<!-- ═══════════════════ TAB SITEMAP ═══════════════════ -->
+<div id="tab-sitemap" class="tab-content active">
+<div class="main">
+
+  <!-- Legend -->
+  <div class="legend">
+    <span class="legend-ttl">Legenda</span>
+    <span class="legend-item"><span class="lswatch" style="background:var(--brand)"></span>Sezione / hub</span>
+    <span class="legend-item"><span class="ldot" style="background:var(--text)"></span>Pagina</span>
+    <span class="legend-item"><span class="ldot" style="background:var(--muted)"></span><em>Route dinamica</em></span>
+    <span class="legend-item"><span class="lswatch" style="background:var(--c-auth)"></span>Area autenticata — noindex</span>
+    <span class="legend-item"><span class="lext"></span>Link a servizio esterno</span>
+    <span class="legend-item"><span class="lkey" style="color:var(--c-legali)">301</span>Redirect da dominio legacy</span>
+  </div>
+
+  <!-- Home -->
+  <div class="home-bar">
+    <div class="home-left">
+      <div class="home-icon">⌂</div>
+      <div>
+        <div class="home-name">Home</div>
+        <div class="home-url">istitutoipso.it/</div>
+      </div>
+    </div>
+    <div class="home-desc">Hero · Corsi attivi · IPSO e Biosofia · Punti di ingresso · Differenzianti · Testimonianze · Partner e riconoscimenti · CTA colloquio</div>
+  </div>
+
+  <div class="divider">Sezioni pubbliche</div>
+
+  <div class="sec-grid">
+
+    <!-- Chi siamo -->
+    <div class="sec-card" style="--sc:var(--c-chi)">
+      <div class="sec-head" onclick="toggleCard(this)">
+        <div class="sec-head-left">
+          <span class="sec-name">Chi siamo</span>
+          <span class="sec-url">istitutoipso.it/chi-siamo/</span>
+        </div>
+        <span class="sec-chevron">▼</span>
+      </div>
+      <div class="page-tree">
+        <div class="pitem"><span class="pname">Storia</span><span class="pbadge pb-sez">sezione</span></div>
+        <div class="pitem"><span class="pname">Biosofia e approccio somatorelazionale</span><span class="pbadge pb-sez">sezione</span></div>
+        <div class="pitem"><span class="pname">Docenti</span><span class="pbadge pb-pag-q">pagina?</span></div>
+        <div class="pitem sub dynamic"><span class="pname">[slug-docente] — scheda individuale</span><span class="pbadge pb-dyn">dinamica</span></div>
+        <div class="pitem"><span class="pname">Organizzazione</span><span class="pbadge pb-sez">sezione</span></div>
+        <div class="pitem"><span class="pname">Certificazioni e riconoscimenti</span><span class="pbadge pb-sez">sezione</span></div>
+      </div>
+    </div>
+
+    <!-- Formazione -->
+    <div class="sec-card" style="--sc:var(--c-form)">
+      <div class="sec-head" onclick="toggleCard(this)">
+        <div class="sec-head-left">
+          <span class="sec-name">Formazione</span>
+          <span class="sec-url">istitutoipso.it/formazione/</span>
+        </div>
+        <span class="sec-chevron">▼</span>
+      </div>
+      <div class="page-tree">
+        <div class="pitem"><span class="pname">Counseling Somatorelazionale</span><span class="purl">/formazione/counseling-somatorelazionale/</span></div>
+        <div class="cta-note">CTA iscrizione / info → Contatti</div>
+        <div class="pitem"><span class="pname">Pratica Bioenergetica</span><span class="purl">/formazione/pratica-bioenergetica/</span></div>
+        <div class="cta-note">CTA iscrizione / info → Contatti</div>
+        <div class="pitem"><span class="pname">IPSO Smart</span><span class="purl">/formazione/ipso-smart/</span></div>
+        <div class="cta-note">CTA iscrizione / info → Contatti</div>
+        <div class="pitem"><span class="pname">Seminari Introduttivi</span><span class="purl">/formazione/seminari-introduttivi/</span></div>
+        <div class="cta-note">CTA iscrizione / info → Contatti</div>
+        <div class="tp-block">
+          <div class="tp-head">
+            <span class="tp-title">Teoria Polivagale</span>
+            <span class="tp-url">/formazione/teoria-polivagale/</span>
+          </div>
+          <div class="tp-note">Grafica e sotto-navigazione proprie. Rimane sotto <code style="font-size:10px;">/formazione/</code> ma funziona come hub verticale autonomo.</div>
+          <div class="tp-pages">
+            <div class="tp-page">· Panoramica</div>
+            <div class="tp-page">· Programma</div>
+            <div class="tp-page">· Docenti</div>
+            <div class="tp-page">· Testimonianze</div>
+            <div class="tp-page">· Community / post-training</div>
+            <div class="tp-page">· FAQ</div>
+            <div class="tp-page">· Iscrizione</div>
+            <div class="tp-page ext">→ Area corsisti TP</div>
+          </div>
+        </div>
+        <div class="pitem dynamic" style="margin-top:4px;"><span class="pname">[slug-corso] — altri percorsi futuri</span><span class="pbadge pb-dyn">dinamica</span></div>
+      </div>
+    </div>
+
+    <!-- Eventi -->
+    <div class="sec-card" style="--sc:var(--c-eventi)">
+      <div class="sec-head" onclick="toggleCard(this)">
+        <div class="sec-head-left">
+          <span class="sec-name">Eventi</span>
+          <span class="sec-url">istitutoipso.it/eventi/</span>
+        </div>
+        <span class="sec-chevron">▼</span>
+      </div>
+      <div class="page-tree">
+        <div class="pitem"><span class="pname">In programma</span><span class="pbadge pb-pag-q">sezione o pagina?</span></div>
+        <div class="pitem"><span class="pname">Esperienze immersive</span><span class="pbadge pb-pag-q">sezione o pagina?</span></div>
+        <div class="pitem"><span class="pname">Eventi aperti</span><span class="pbadge pb-pag-q">sezione o pagina?</span></div>
+        <div class="pitem"><span class="pname">Passati</span><span class="pbadge pb-pag-q">sezione o pagina?</span></div>
+        <div class="cta-note">Da decidere con il dev: filtri/tab su /eventi/ oppure route separate — impatta SEO e struttura URL</div>
+        <div class="pitem dynamic"><span class="pname">[slug-evento] — scheda evento</span><span class="pbadge pb-dyn">pagina dinamica</span></div>
+        <div class="cta-note">CTA "Iscriviti" su ogni scheda evento → Contatti</div>
+      </div>
+    </div>
+
+    <!-- Archivio -->
+    <div class="sec-card" style="--sc:var(--c-archivio)">
+      <div class="sec-head" onclick="toggleCard(this)">
+        <div class="sec-head-left">
+          <span class="sec-name">Archivio</span>
+          <span class="sec-url">istitutoipso.it/archivio/</span>
+        </div>
+        <span class="sec-chevron">▼</span>
+      </div>
+      <div class="page-tree">
+        <div class="pitem"><span class="pname">Pubblicazioni</span><span class="purl">/archivio/pubblicazioni/</span></div>
+        <div class="pitem"><span class="pname">Articoli</span><span class="purl">/archivio/articoli/</span></div>
+        <div class="pitem"><span class="pname">Libri</span><span class="purl">/archivio/libri/</span></div>
+        <div class="pitem"><span class="pname">Riviste</span><span class="purl">/archivio/riviste/</span></div>
+        <div class="pitem"><span class="pname">Video e audio</span><span class="purl">/archivio/video-e-audio/</span></div>
+        <div class="pitem"><span class="pname">Centro Documentazione Wilhelm Reich</span><span class="purl">/archivio/centro-documentazione-wilhelm-reich/</span></div>
+        <div class="pitem dynamic"><span class="pname">[tipologia] / [slug-contenuto]</span><span class="pbadge pb-dyn">dinamica</span></div>
+      </div>
+    </div>
+
+    <!-- Contatti -->
+    <div class="sec-card" style="--sc:var(--brand-mid)">
+      <div class="sec-head" onclick="toggleCard(this)">
+        <div class="sec-head-left">
+          <span class="sec-name">Contatti</span>
+          <span class="sec-url">istitutoipso.it/contatti/</span>
+        </div>
+        <span class="sec-chevron">▼</span>
+      </div>
+      <div class="page-tree">
+        <div class="pitem"><span class="pname">Form di contatto</span></div>
+        <div class="pitem"><span class="pname">Prenota un colloquio orientativo</span><span class="pbadge pb-cta">tramite form</span></div>
+        <div class="pitem"><span class="pname">Recapiti e sede</span><span class="purl">/contatti/</span></div>
+      </div>
+    </div>
+
+  </div><!-- /sec-grid -->
+
+  <!-- Rete professionale: opzione 2 -->
+  <div class="divider">Rete professionale — solo da footer e link contestuali</div>
+  <div class="rete-nota">
+    <div class="rete-nota-main">
+      <div class="rete-nota-title">Rete professionale</div>
+      <div class="rete-nota-url">istitutoipso.it/rete-professionale/</div>
+      <div class="rete-nota-desc">Directory di collaboratori e professionisti legati a IPSO. Molti sono docenti dei corsi dell'istituto, altri sono collaboratori. Non tutti i docenti fanno parte della rete, e non tutti nella rete sono docenti. Non entra nel menu principale. Raggiungibile da:</div>
+      <div class="rete-access-list">
+        <span class="rete-chip">Footer del sito</span>
+        <span class="rete-chip">Chi siamo (link contestuale)</span>
+        <span class="rete-chip">Pagine corso (sbocchi professionali)</span>
+        <span class="rete-chip">Teoria Polivagale (operatori polivagali)</span>
+      </div>
+    </div>
+    <div class="rete-nota-pages">
+      <div class="rete-mini-tree">
+        <div class="rete-mini-item"><span>Counselor</span><span class="purl" style="font-size:9.5px;">/counselor/</span></div>
+        <div class="rete-mini-item"><span>Psicoterapeuti</span><span class="purl" style="font-size:9.5px;">/psicoterapeuti/</span></div>
+        <div class="rete-mini-item"><span>Operatori polivagali</span><span class="purl" style="font-size:9.5px;">/operatori-polivagali/</span></div>
+        <div class="rete-mini-item" style="font-style:italic;color:var(--muted)"><span>[slug-professionista]</span><span class="pbadge pb-dyn" style="font-size:9px;padding:0 4px;">dinamica</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cerca: feature di header -->
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;">
+    <div class="feat-chip"><strong>Cerca</strong><span class="feat-where">feature nell'header</span> — non una pagina separata. I risultati vivono su un URL tipo <code style="font-size:10px;">/cerca/?q=…</code> ma non sono indicizzati.</div>
+    <div class="feat-chip"><strong>Newsletter</strong><span class="feat-where">sezione in Eventi / Approfondimenti</span> — l'iscrizione è nella pagina eventi/approfondimenti. Nessuna pagina dedicata.</div>
+  </div>
+
+  <!-- Flussi strategici -->
+  <div class="divider">Flussi strategici — come le pagine si collegano</div>
+  <div class="flows-section">
+
+    <div class="flow-item">
+      <div class="flow-head">
+        <span class="flow-obj">Scoperta organica → iscrizione a un corso</span>
+        <span class="flow-who">Prospect</span>
+      </div>
+      <div class="flow-body">
+        <div class="flow-node"><div class="fn-page">Archivio<small>articolo o video</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page">Chi siamo<small>Biosofia</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page">Formazione<small>pagina corso</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page">Contatti<small>colloquio orientativo</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page ext">Sistema prenotazione<small>esterno</small></div></div>
+      </div>
+    </div>
+
+    <div class="flow-item">
+      <div class="flow-head">
+        <span class="flow-obj">Ricerca diretta corso → iscrizione</span>
+        <span class="flow-who">Prospect con intenzione</span>
+      </div>
+      <div class="flow-body">
+        <div class="flow-node"><div class="fn-page">Home<small>corsi in evidenza</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page">Formazione / [corso]<small>landing corso</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page">Contatti<small>colloquio / info</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page ext">Sistema prenotazione<small>esterno</small></div></div>
+      </div>
+    </div>
+
+    <div class="flow-item">
+      <div class="flow-head">
+        <span class="flow-obj">Evento → approfondimento → corso</span>
+        <span class="flow-who">Prospect da evento</span>
+      </div>
+      <div class="flow-body">
+        <div class="flow-node"><div class="fn-page">Home / Social<small>promozione evento</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page">Eventi / [evento]<small>scheda evento</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page">Formazione<small>corso correlato</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page">Contatti<small>colloquio</small></div></div>
+      </div>
+    </div>
+
+    <div class="flow-item">
+      <div class="flow-head">
+        <span class="flow-obj">Corsista → lezione → test ECM</span>
+        <span class="flow-who">Corsista attivo</span>
+      </div>
+      <div class="flow-body">
+        <div class="flow-node"><div class="fn-page auth">Login<small>area corsisti</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page auth">Dashboard<small>riprendi da qui</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page auth">Lezione<small>video Vimeo embed</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page auth">Test ECM<small>handoff screen</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page ext">Promate / Spazio Iris<small>⚠ esterno</small></div></div>
+      </div>
+      <div class="flow-note">Il passaggio a Promate è l'unico punto non ancora integrabile con certezza. Vedi tab Note tecniche.</div>
+    </div>
+
+    <div class="flow-item">
+      <div class="flow-head">
+        <span class="flow-obj">Alumni / sostenitore → community → formazione continua</span>
+        <span class="flow-who">Ex corsista</span>
+      </div>
+      <div class="flow-body">
+        <div class="flow-node"><div class="fn-page auth">Login<small>area corsisti</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page auth">Community<small>post-training</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page">Formazione<small>nuovo corso</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page">Contatti<small>iscrizione</small></div></div>
+      </div>
+    </div>
+
+    <div class="flow-item">
+      <div class="flow-head">
+        <span class="flow-obj">Trovare un professionista</span>
+        <span class="flow-who">Utente generico</span>
+      </div>
+      <div class="flow-body">
+        <div class="flow-node"><div class="fn-page">Footer / Chi siamo<small>link contestuale</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page">Rete professionale<small>directory filtrata</small></div><span class="fn-arrow">→</span></div>
+        <div class="flow-node"><div class="fn-page ext">Contatto diretto<small>email / sito professionista</small></div></div>
+      </div>
+      <div class="flow-note">IPSO non gestisce il contatto: il link porta direttamente al professionista o al suo sito esterno.</div>
+    </div>
+
+  </div><!-- /flows-section -->
+
+  <!-- Area corsisti -->
+  <div class="divider">Area autenticata — noindex</div>
+  <div class="auth-wrap" id="authWrap">
+    <div class="auth-hdr" onclick="toggleAuth()">
+      <div class="auth-title-group">
+        <div class="auth-lock">🔒</div>
+        <div>
+          <div class="auth-name">Area corsisti</div>
+          <div class="auth-url-sub">istitutoipso.it/area-corsisti/ &nbsp;·&nbsp; oppure app.istitutoipso.it/</div>
+        </div>
+        <span class="auth-tag">noindex · login richiesto</span>
+      </div>
+      <span class="auth-chevron">▼</span>
+    </div>
+    <div class="auth-body">
+      <div class="auth-card" id="ac1">
+        <div class="auth-card-head" onclick="toggleAuthCard('ac1')">
+          <div><div class="auth-card-name">Accesso</div><div class="auth-card-url">…/area-corsisti/login/</div></div>
+          <span class="auth-card-chevron">▼</span>
+        </div>
+        <div class="page-tree">
+          <div class="pitem"><span class="pname">Login</span><span class="purl">/login/</span></div>
+          <div class="pitem"><span class="pname">Recupera accesso</span><span class="purl">/recupera-accesso/</span></div>
+        </div>
+      </div>
+      <div class="auth-card" id="ac2">
+        <div class="auth-card-head" onclick="toggleAuthCard('ac2')">
+          <div><div class="auth-card-name">Dashboard</div><div class="auth-card-url">…/area-corsisti/dashboard/</div></div>
+          <span class="auth-card-chevron">▼</span>
+        </div>
+        <div class="page-tree">
+          <div class="pitem"><span class="pname">Riprendi da dove hai lasciato</span></div>
+          <div class="pitem"><span class="pname">Corsi attivi (card per corso)</span></div>
+          <div class="pitem"><span class="pname">Prossima attività live</span></div>
+          <div class="pitem"><span class="pname">Stato ECM</span></div>
+        </div>
+      </div>
+      <div class="auth-card" id="ac3">
+        <div class="auth-card-head" onclick="toggleAuthCard('ac3')">
+          <div><div class="auth-card-name">Corso [slug-corso]</div><div class="auth-card-url">…/area-corsisti/corsi/[slug]/</div></div>
+          <span class="auth-card-chevron">▼</span>
+        </div>
+        <div class="page-tree">
+          <div class="pitem"><span class="pname">Panoramica</span></div>
+          <div class="pitem"><span class="pname">Moduli</span></div>
+          <div class="pitem sub dynamic"><span class="pname">[slug-modulo] / [slug-lezione]</span><span class="pbadge pb-dyn">dinamica</span></div>
+          <div class="pitem"><span class="pname">Live e calendario</span></div>
+          <div class="pitem"><span class="pname">Registrazioni</span></div>
+          <div class="pitem"><span class="pname">Materiali</span></div>
+          <div class="pitem"><span class="pname">Test ECM</span><span class="pbadge pb-ext">→ Promate</span></div>
+          <div class="pitem"><span class="pname">Community</span></div>
+          <div class="pitem"><span class="pname">Assistenza</span></div>
+        </div>
+      </div>
+      <div class="auth-card" id="ac4">
+        <div class="auth-card-head" onclick="toggleAuthCard('ac4')">
+          <div><div class="auth-card-name">Account</div><div class="auth-card-url">…/area-corsisti/profilo/</div></div>
+          <span class="auth-card-chevron">▼</span>
+        </div>
+        <div class="page-tree">
+          <div class="pitem"><span class="pname">Profilo</span></div>
+          <div class="pitem"><span class="pname">Supporto</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="auth-meta">
+      <span class="auth-meta-item"><span class="auth-meta-dot"></span>SSO / OIDC — da verificare con Promate</span>
+      <span class="auth-meta-item"><span class="auth-meta-dot"></span>Vimeo embed protetto — no branding, solo su istitutoipso.it</span>
+      <span class="auth-meta-item"><span class="auth-meta-dot"></span>Ruoli: corsista · alumni · sostenitore · docente · staff</span>
+    </div>
+  </div>
+
+  <!-- Legal -->
+  <div class="divider">Pagine legali</div>
+  <div class="legal-strip">
+    <div class="legal-label">istitutoipso.it/pagine-legali/</div>
+    <div class="legal-items">
+      <div class="legal-item"><span class="legal-name">Privacy Policy</span><span class="legal-url">/pagine-legali/privacy-policy/</span></div>
+      <div class="legal-item"><span class="legal-name">Cookie Policy</span><span class="legal-url">/pagine-legali/cookie-policy/</span></div>
+      <div class="legal-item"><span class="legal-name">Termini e condizioni</span><span class="legal-url">/pagine-legali/termini-e-condizioni/</span></div>
+      <div class="legal-item"><span class="legal-name">Dichiarazione di accessibilità</span><span class="legal-url">/pagine-legali/dichiarazione-di-accessibilita/</span></div>
+    </div>
+  </div>
+
+  <!-- Redirect -->
+  <div class="redirect-box">
+    <div class="redirect-title">Redirect 301 dai domini legacy → istitutoipso.it</div>
+    <div class="redirect-item"><span class="rf">sentirsivivi.it/</span><span class="ra">→</span><span class="rt">istitutoipso.it/eventi/</span><span class="rn">redirect generico + matrice pagina per pagina</span></div>
+    <div class="redirect-item"><span class="rf">ipsosmart.it/</span><span class="ra">→</span><span class="rt">istitutoipso.it/formazione/ipso-smart/</span></div>
+    <div class="redirect-item"><span class="rf">teoriapolivagale.it/</span><span class="ra">→</span><span class="rt">istitutoipso.it/formazione/teoria-polivagale/</span><span class="rn">molte sotto-pagine con valore SEO — matrice obbligatoria</span></div>
+    <div class="redirect-item"><span class="rf">biosofia.it/</span><span class="ra">→</span><span class="rt">istitutoipso.it/</span><span class="rn">se si abbandona il dominio — matrice completa</span></div>
+  </div>
+
+</div><!-- /main -->
+</div><!-- /tab-sitemap -->
+
+
+<!-- ═══════════════════ TAB NOTE TECNICHE ═══════════════════ -->
+<div id="tab-note" class="tab-content">
+<div class="note-main">
+
+  <!-- 1. Vimeo -->
+  <div class="note-section" id="ns1">
+    <div class="note-section-head" onclick="toggleNote('ns1')">
+      <span class="note-num ok">1</span>
+      <span class="note-title">Vimeo — non è un problema</span>
+      <span class="note-status ns-ok">✓ Confermato</span>
+      <span class="note-chevron">▼</span>
+    </div>
+    <div class="note-body">
+      <p class="note-p">Richiede un piano Vimeo a pagamento che includa personalizzazione del player e restrizione dell'embedding per dominio. <strong>Verificare il piano Vimeo già attivo prima dell'acquisto.</strong></p>
+      <p class="note-p">Durante il normale utilizzo, il corsista fruisce del video direttamente nell'area IPSO, senza accedere al sito Vimeo e senza visualizzarne il branding.</p>
+      <ul class="note-ul">
+        <li>Il video appare dentro il sito IPSO</li>
+        <li>Il logo Vimeo viene rimosso dal player</li>
+        <li>Il corsista non deve entrare su Vimeo né creare un account</li>
+        <li>Il video può essere riprodotto <strong>solo</strong> su istitutoipso.it — non altrove</li>
+        <li>Il sistema può registrare se il corsista ha iniziato, completato o interrotto la lezione (Vimeo Player SDK)</li>
+      </ul>
+      <div class="note-sources">
+        <div class="note-src-title">Fonti</div>
+        <a class="note-src-link" href="https://help.vimeo.com/hc/en-us/articles/12426275096337-Embedding-features-by-plan-type" target="_blank">Embedding features by plan type — Vimeo Help</a>
+        <a class="note-src-link" href="https://help.vimeo.com/hc/en-us/articles/12426199699985-About-video-privacy-settings" target="_blank">About video privacy settings — Vimeo Help</a>
+        <a class="note-src-link" href="https://help.vimeo.com/hc/en-us/articles/30030693052305-How-do-I-set-up-domain-level-privacy" target="_blank">How do I set up domain-level privacy — Vimeo Help</a>
+        <a class="note-src-link" href="https://developer.vimeo.com/player/sdk/reference" target="_blank">Vimeo Player SDK Reference — Vimeo Developer</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Materiali, integrazioni -->
+  <div class="note-section" id="ns2">
+    <div class="note-section-head" onclick="toggleNote('ns2')">
+      <span class="note-num ok">2</span>
+      <span class="note-title">Materiali, registrazioni, calendario e comunicazioni — facili da integrare</span>
+      <span class="note-status ns-ok">✓ Confermato</span>
+      <span class="note-chevron">▼</span>
+    </div>
+    <div class="note-body">
+      <ul class="note-ul">
+        <li><strong>Video:</strong> conservati su Vimeo e mostrati dentro il sito (vedi punto 1)</li>
+        <li><strong>PDF e dispense:</strong> possono essere gestiti direttamente nell'area corsisti oppure conservati su uno spazio cloud integrato. La soluzione dovrà evitare passaggi esterni e schermate di autenticazione aggiuntive. MasterStudy LMS supporta la gestione dei materiali.</li>
+        <li><strong>Calendario:</strong> il calendario può essere integrato nell'area corsisti usando Google Calendar o un componente personalizzato. MasterStudy LMS Pro supporta Google Meet tramite API. La veste grafica IPSO può richiedere personalizzazione front-end — non è automatica senza configurazione.</li>
+        <li><strong>Comunicazioni:</strong> inviate tramite email e mostrate anche nella dashboard come notifiche</li>
+        <li><strong>Test ECM:</strong> gestiti da Promate / Spazio Iris (vedi punto 3)</li>
+      </ul>
+      <div class="note-box">
+        <div class="note-box-title">Da verificare</div>
+        <p class="note-p" style="margin:0;">Verificare se l'hosting attuale può supportare il nuovo sito e l'area corsisti in termini di spazio, banda e prestazioni. Se non è adeguato, va previsto un hosting dedicato o un piano superiore prima del lancio.</p>
+      </div>
+      <div class="note-sources">
+        <div class="note-src-title">Fonti</div>
+        <a class="note-src-link" href="https://docs.stylemixthemes.com/masterstudy-lms/lms-course-features/how-to-add-video-to-the-lesson" target="_blank">MasterStudy LMS — Come aggiungere video a una lezione</a>
+        <a class="note-src-link" href="https://docs.stylemixthemes.com/masterstudy-lms/lms-pro-addons/google-meet" target="_blank">MasterStudy LMS Pro — Integrazione Google Meet</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Promate -->
+  <div class="note-section" id="ns3">
+    <div class="note-section-head" onclick="toggleNote('ns3')">
+      <span class="note-num warn">3</span>
+      <span class="note-title">L'unico punto ancora incerto: Promate / Spazio Iris</span>
+      <span class="note-status ns-warn">⚠ Da verificare</span>
+      <span class="note-chevron">▼</span>
+    </div>
+    <div class="note-body">
+      <p class="note-p">Promate viene utilizzato per i test ECM. Attualmente il corsista deve:</p>
+      <ul class="note-ul">
+        <li>uscire dall'area IPSO</li>
+        <li>andare sul sito di Spazio Iris / Promate</li>
+        <li>inserire altre credenziali</li>
+        <li>cercare il proprio corso</li>
+        <li>aprire il test</li>
+      </ul>
+      <p class="note-p">Nelle pagine e nella documentazione pubblicamente accessibile di ProMate non è stata trovata una documentazione tecnica relativa a SSO, SAML, OpenID Connect, API di autenticazione o link autenticati. La disponibilità di queste funzioni deve essere verificata direttamente con ProMate e Spazio Iris.</p>
+    </div>
+  </div>
+
+  <!-- 4. Domande Promate -->
+  <div class="note-section" id="ns4">
+    <div class="note-section-head" onclick="toggleNote('ns4')">
+      <span class="note-num warn">4</span>
+      <span class="note-title">Cosa chiedere a Promate / Spazio Iris</span>
+      <span class="note-status ns-warn">Azione richiesta</span>
+      <span class="note-chevron">▼</span>
+    </div>
+    <div class="note-body">
+      <div class="note-box">
+        <div class="note-box-title">Domande da fare (in linguaggio semplice)</div>
+        <div class="note-q">
+          <span class="note-q-num">1</span>
+          <div><div class="note-q-text">È possibile usare un unico accesso?</div><div class="note-q-sub">Il corsista entra nell'area IPSO e poi accede al test ECM senza inserire di nuovo email e password. Tecnicamente si chiama SSO (Single Sign-On).</div></div>
+        </div>
+        <div class="note-q">
+          <span class="note-q-num">2</span>
+          <div><div class="note-q-text">È possibile creare automaticamente gli utenti?</div><div class="note-q-sub">Quando una persona si iscrive a un corso IPSO, il sistema dovrebbe creare automaticamente anche il suo account su Promate. Questo richiede una API.</div></div>
+        </div>
+        <div class="note-q">
+          <span class="note-q-num">3</span>
+          <div><div class="note-q-text">È possibile aprire direttamente il test?</div><div class="note-q-sub">Il pulsante nell'area IPSO dovrebbe portare al test corretto, non alla homepage di Promate.</div></div>
+        </div>
+        <div class="note-q">
+          <span class="note-q-num">4</span>
+          <div><div class="note-q-text">È possibile ricevere automaticamente il risultato?</div><div class="note-q-sub">Dopo il test, Promate dovrebbe comunicare all'area IPSO: test completato, superato o non superato, stato dei crediti ECM, attestato disponibile.</div></div>
+        </div>
+        <div class="note-q">
+          <span class="note-q-num">5</span>
+          <div><div class="note-q-text">È possibile mostrare il test dentro il sito IPSO?</div><div class="note-q-sub">Bisogna verificare se il test può essere visualizzato dentro una pagina IPSO senza aprire un altro sito (tecnicamente via iframe). Va verificato con attenzione per sicurezza e compatibilità.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Piano B -->
+  <div class="note-section" id="ns5">
+    <div class="note-section-head" onclick="toggleNote('ns5')">
+      <span class="note-num info">5</span>
+      <span class="note-title">Piano B — se Promate non permette l'integrazione</span>
+      <span class="note-status ns-info">Piano di riserva</span>
+      <span class="note-chevron">▼</span>
+    </div>
+    <div class="note-body">
+      <p class="note-p">Solo il test ECM richiederebbe il passaggio su Spazio Iris. Tutto il resto (video, materiali, calendario, community) resterebbe nell'area IPSO. Per rendere il passaggio chiaro e non confuso, si può creare una schermata di handoff:</p>
+      <div class="handoff-mock">
+        <div class="handoff-title">Test ECM</div>
+        <div class="handoff-sub">Il test viene gestito sulla piattaforma Spazio Iris.<br>Per accedere utilizza le credenziali ECM ricevute al momento dell'iscrizione.</div>
+        <div class="handoff-creds">📧 &nbsp;Le tue credenziali ECM ti sono state inviate via email al momento dell'iscrizione.<br>Hai problemi di accesso? Contatta la segreteria.</div>
+        <span class="handoff-btn">Apri il test →</span>
+      </div>
+      <p class="note-p">Il pulsante deve portare direttamente al test specifico, non alla homepage generale di Promate. Questa soluzione non elimina il secondo login, ma rende il passaggio comprensibile e gestibile.</p>
+    </div>
+  </div>
+
+  <!-- 6. Stack consigliato -->
+  <div class="note-section" id="ns6">
+    <div class="note-section-head" onclick="toggleNote('ns6')">
+      <span class="note-num info">6</span>
+      <span class="note-title">Stack consigliato: MasterStudy LMS + BuddyPress</span>
+      <span class="note-status ns-info">Proposta tecnica</span>
+      <span class="note-chevron">▼</span>
+    </div>
+    <div class="note-body">
+      <p class="note-p">Per gestire l'area corsisti IPSO esiste una soluzione consolidata, non troppo costosa e adattabile completamente al brand IPSO.</p>
+      <div class="note-stack">
+        <div class="stack-card">
+          <div class="stack-name">MasterStudy LMS Pro Plus</div>
+          <div class="stack-type">Plugin WordPress per l'area corsisti</div>
+          <div class="stack-desc">Gestisce percorsi, videolezioni Vimeo, materiali, avanzamento e account degli studenti. Integrazione Google Meet per sessioni live. L'interfaccia può essere adattata con logo, colori, font e testi IPSO.</div>
+          <span class="stack-tag warn">Licenza Lifetime per un sito — prezzo da verificare al momento dell'acquisto. Aggiornamenti e assistenza premium inclusi per il periodo indicato dal fornitore.</span>
+        </div>
+        <div class="stack-card">
+          <div class="stack-name">BuddyPress</div>
+          <div class="stack-type">Plugin WordPress per la community</div>
+          <div class="stack-desc">Profili utente, gruppi, messaggi privati e bacheca della community. Adatto se serve una vera area alumni e sostenitori con interazione tra iscritti. Il plugin base è gratuito; alcune funzionalità avanzate richiedono estensioni di terze parti a pagamento. Verificare i requisiti specifici prima dell'implementazione.</div>
+          <span class="stack-tag">Gratuito (core)</span>
+        </div>
+        <div class="stack-card">
+          <div class="stack-name">bbPress</div>
+          <div class="stack-type">Alternativa più semplice</div>
+          <div class="stack-desc">Forum e discussioni tematiche. Più leggero di BuddyPress. Da preferire se basta uno spazio per domande, confronto e supporto tra corsisti, senza profili sociali. Il plugin è gratuito; eventuali estensioni per integrazione con sistemi di accesso o notifiche potrebbero avere costi aggiuntivi.</div>
+          <span class="stack-tag">Gratuito (core)</span>
+        </div>
+        <div class="stack-card">
+          <div class="stack-name">Vimeo Business</div>
+          <div class="stack-type">Hosting video</div>
+          <div class="stack-desc">Embedding con restrizione dominio, rimozione branding, Player SDK per tracciare avanzamento. Piano a pagamento mensile/annuale.</div>
+          <span class="stack-tag warn">Piano a pagamento</span>
+        </div>
+      </div>
+      <div class="note-box">
+        <div class="note-box-title">Quale community scegliere</div>
+        <p class="note-p" style="margin:0;">Scegliere <strong>BuddyPress</strong> solo se serve una vera area alumni e sostenitori con profili, gruppi e interazione sociale tra gli iscritti. Scegliere <strong>bbPress</strong> se basta uno spazio per domande, confronto tra corsisti e supporto. Se la community è ancora da definire, partire con bbPress e valutare BuddyPress in futuro. In entrambi i casi, verificare prima dell'implementazione se le funzionalità necessarie rientrano nel core gratuito o richiedono estensioni a pagamento.</p>
+      </div>
+      <div class="note-sources">
+        <div class="note-src-title">Fonti</div>
+        <a class="note-src-link" href="https://stylemixthemes.com/wordpress-lms-plugin/pricing/" target="_blank">MasterStudy LMS — Pricing</a>
+        <a class="note-src-link" href="https://docs.stylemixthemes.com/masterstudy-lms/lms-course-features/how-to-add-video-to-the-lesson" target="_blank">MasterStudy LMS — Come aggiungere video a una lezione</a>
+        <a class="note-src-link" href="https://docs.stylemixthemes.com/masterstudy-lms/lms-pro-addons/google-meet" target="_blank">MasterStudy LMS Pro — Integrazione Google Meet</a>
+        <a class="note-src-link" href="https://bel.wordpress.org/plugins/buddypress/" target="_blank">BuddyPress — WordPress Plugin Directory</a>
+        <a class="note-src-link" href="https://en-gb.wordpress.org/plugins/bbpress/" target="_blank">bbPress — WordPress Plugin Directory</a>
+      </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /note-main -->
+</div><!-- /tab-note -->
+
+<footer style="margin-top:0;padding:12px 40px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+  <span style="font-family:Georgia,serif;font-size:12px;color:var(--muted);letter-spacing:.06em;">IPSO · istitutoipso.it</span>
+  <span style="font-size:10.5px;color:var(--faint);">Documento operativo · Rev. 2</span>
+</footer>
+
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  if(btn) btn.classList.add('active');
+}
+function toggleCard(btn){btn.closest('.sec-card').classList.toggle('collapsed');}
+function toggleContatti(){document.getElementById('contattiCard').classList.toggle('collapsed');}
+function toggleAuth(){document.getElementById('authWrap').classList.toggle('collapsed');}
+function toggleAuthCard(id){document.getElementById(id).classList.toggle('collapsed');}
+function toggleNote(id){document.getElementById(id).classList.toggle('collapsed');}
+var ct='auto';
+function toggleTheme(){
+  var btn=document.getElementById('themeBtn'),root=document.documentElement;
+  if(ct==='auto'||ct==='light'){root.setAttribute('data-theme','dark');btn.textContent='☀ Light';ct='dark';}
+  else{root.setAttribute('data-theme','light');btn.textContent='☾ Dark';ct='light';}
+}
+</script>
+</body>
+</html>
